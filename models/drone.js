@@ -7,7 +7,7 @@ const DroneSchema = new Schema({
   maxSpeed: Number
 });
 
-//???
+//actual model
 const Drone = mongoose.model('Drone', DroneSchema);
 
 

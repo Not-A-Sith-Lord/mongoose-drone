@@ -4,9 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 
+//routes wiring
 var index = require('./routes/index');
 var users = require('./routes/users');
 const drones = require('./routes/drones');
@@ -30,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//"mounting" the routes, probably needs to be here -Nizar
 app.use('/', index);
 app.use('/users', users);
 app.use('/', drones);
