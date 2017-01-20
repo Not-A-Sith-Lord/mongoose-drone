@@ -20,16 +20,39 @@ router.get('/drones', (req, res, next) => {
 
 
 router.get('/drones/new', (req, res, next) => {
-  // Iteration #4
+  res.render("drones/new");
 });
 
 router.post('/drones', (req, res, next) => {
-  // Iteration #4
+  const newDrone = {
+    droneName: req.body.droneName,
+    propellers: req.body.propellers,
+    maxSpeed: req.body.maxSpeed
+  };
+
+  Drone.create(newDrone, (err, docs) => {
+    if (err) { throw err };
+    
+    mongoose.connection.close();
+    docs.forEach( (drone) => {
+      console.log(drone.droneName)
+    })
+    mongoose.connection.close();
+  });
+
 });
 
 
 router.get('/drones/:id', (req, res, next) => {
-  // Iteration #3
+  const droneId = req.params.id;
+  Drone.findOne({_id: droneId}, (err, droneObj) => {
+    if (err) return next(err);
+
+    res.render("drones/show", {
+      drone: droneObj
+    });
+
+  });
 });
 
 
