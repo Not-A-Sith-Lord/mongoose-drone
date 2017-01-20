@@ -8,3 +8,12 @@ const droneData = [
   { droneName: 'Racer 57', propellers: 4, maxSpeed: 20 },
   { droneName: 'Courier 3000i', propellers: 6, maxSpeed: 18 }
 ];
+
+Drone.create(droneData, (err, docs) => {
+  if (err) { throw err };
+
+  docs.forEach( (drone) => {
+    console.log(drone.droneName)
+  })
+  mongoose.connection.close();
+});
