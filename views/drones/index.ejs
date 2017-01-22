@@ -6,7 +6,10 @@
       <h3> <%= drone.droneName %> </h3>
       <p> Number of propellors: <%= drone.propellers %> <p>
       <p> Max Speed: <%= drone.maxSpeed %> </p>
-      <a href=" /drones/<%= drone._id %>"> Details </a>
+      <a href="/drones/<%= drone._id %>"> Details </a>
+      <form method="post" action="/drones/<%= drone._id %>/delete">
+        <button> Delete Dis Bitch</button>
+      </form>
     </li>
   <%  }); %>
 </ul>

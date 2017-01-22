@@ -1,7 +1,5 @@
 const express = require('express');
-
 const Drone = require('../models/drone');
-
 const router = express.Router();
 
 
@@ -13,9 +11,7 @@ router.get('/drones', (req, res, next) => {
     res.render("drones/index", {
       drones: droneArray
     });
-
   });
-
 });
 
 
@@ -32,13 +28,13 @@ router.post('/drones', (req, res, next) => {
 
   Drone.create(newDrone, (err, docs) => {
     if (err) { throw err };
-    
-    mongoose.connection.close();
-    docs.forEach( (drone) => {
-      console.log(drone.droneName)
-    })
-    mongoose.connection.close();
+
+    console.log(`Created ${newDrone.droneName}`);
+
+
   });
+
+  res.redirect("/drones")
 
 });
 
@@ -66,8 +62,33 @@ router.post('/drones/:id', (req, res, next) => {
 
 
 router.post('/drones/:id/delete', (req, res, next) => {
-  // Iteration #5 (Bonus)
+  const droneId = req.params.id;
+
+  Drone.findByIdAndRemove(droneId, (err, idk) => {
+    if (err) return next(err);
+    console.log("I guess something got deleted");
+
+    res.redirect("/drones");
+  });
+
 });
 
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
